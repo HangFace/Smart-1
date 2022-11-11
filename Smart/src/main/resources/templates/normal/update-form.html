@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="normal/base::layout(~{::section})">
+<head>
+  <meta charset="UTF-8">
+  <title th:text="${title}">About Page</title>
+</head>
+<body>
+<section>
+
+  <form id="login-form" class="form" th:action="@{/user/process-update}" method="post"  th:object="${contact}">
+    <h1 class="text-center">Update Contact</h1>
+    <div class="form-group">
+
+      <input type="hidden" th:value="${contact.c_id}"  name="id" id="id" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="name" >First Name:</label><br>
+      <input th:value="${contact.name}" type="text" name="name" id="name" class="form-control">
+    </div>
+    <br>
+    <div class="form-group">
+      <label for="nickname" >Second Name:</label><br>
+      <input th:value="${contact.nickName}" type="text" name="nickName" id="nickname" class="form-control">
+    </div>
+    <br>
+    <div class="form-group">
+      <label for="phone" >Contact Number:</label><br>
+      <input th:value="${contact.phone}" type="number" name="phone" id="phone" class="form-control">
+    </div>
+    <br>
+    <div class="form-group">
+      <label for="email" >Email:</label><br>
+      <input th:value="${contact.email}" type="email" name="email" id="email" class="form-control">
+    </div>
+    <br>
+    <div class="form-group">
+      <label for="work" >Work:</label><br>
+      <input th:value="${contact.work}" type="text" name="work" id="work" class="form-control">
+    </div>
+    <br>
+    <div class="form-group">
+
+      <textarea th:text="${contact.description}" name="description" id="mytextarea" placeholder="Enter Description" class="form-control" rows="5"></textarea>
+    </div>
+    <br>
+    <div class="container">
+      <img th:src="@{'/img/'+${contact.image}}" class="img-fluid" />
+    </div>
+    <div class="custom-file">
+      <input  type="file" name="image" />
+    </div>
+    <br>
+    <div class="form-group text-center ">
+
+      <input type="submit" name="submit" class="btn bg-primary text-white" value="Update">
+    </div>
+
+  </form>
+  <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+  <script>
+      tinymce.init({
+        selector: '#mytextarea'
+      });
+    </script>
+</section>
+
+</body>
+</html>
