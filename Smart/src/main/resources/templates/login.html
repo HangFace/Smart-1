@@ -34,13 +34,12 @@
                                 <input type="text" name="password" id="password" class="form-control">
                             </div>
                             <br>
-                            <div class="form-group text-center ">
-                                <label for="remember-me" ><span>Remember me</span> <span><input id="remember-me" name="remember-me" type="checkbox"></span></label><br>
-                                <br>
-                                <input type="submit" name="submit" class="btn bg-primary text-white" value="submit">
+                            <div class="container text-center">
+                                <button class="btn btn-success">Log in</button>
                             </div>
-                            <div  id="register-link" class=" form-group text-right">
-                                <a href="/signup/" >Register here</a>
+                            <br>
+                            <div class="container text-center">
+                                <a th:href="@{/forgot_password}">Forgot Password</a>
                             </div>
                         </form>
                     </div>

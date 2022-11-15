@@ -11,40 +11,40 @@
     <h1 class="text-center">Update Contact</h1>
     <div class="form-group">
 
-      <input type="hidden" th:value="${contact.c_id}"  name="id" id="id" class="form-control">
+      <input type="hidden" th:value="${contact.getc_id()}"  name="c_id" id="c_id" class="form-control">
     </div>
     <div class="form-group">
       <label for="name" >First Name:</label><br>
-      <input th:value="${contact.name}" type="text" name="name" id="name" class="form-control">
+      <input th:value="${contact.getName()}" type="text" name="name" id="name" class="form-control">
     </div>
     <br>
     <div class="form-group">
       <label for="nickname" >Second Name:</label><br>
-      <input th:value="${contact.nickName}" type="text" name="nickName" id="nickname" class="form-control">
+      <input th:value="${contact.getNickName()}" type="text" name="nickName" id="nickname" class="form-control">
     </div>
     <br>
     <div class="form-group">
       <label for="phone" >Contact Number:</label><br>
-      <input th:value="${contact.phone}" type="number" name="phone" id="phone" class="form-control">
+      <input th:value="${contact.getPhone()}" type="number" name="phone" id="phone" class="form-control">
     </div>
     <br>
     <div class="form-group">
       <label for="email" >Email:</label><br>
-      <input th:value="${contact.email}" type="email" name="email" id="email" class="form-control">
+      <input th:value="${contact.getEmail()}" type="email" name="email" id="email" class="form-control">
     </div>
     <br>
     <div class="form-group">
       <label for="work" >Work:</label><br>
-      <input th:value="${contact.work}" type="text" name="work" id="work" class="form-control">
+      <input th:value="${contact.getWork()}" type="text" name="work" id="work" class="form-control">
     </div>
     <br>
     <div class="form-group">
 
-      <textarea th:text="${contact.description}" name="description" id="mytextarea" placeholder="Enter Description" class="form-control" rows="5"></textarea>
+      <textarea th:text="${contact.getDescription()}" name="description" id="mytextarea" placeholder="Enter Description" class="form-control" rows="5"></textarea>
     </div>
     <br>
     <div class="container">
-      <img th:src="@{'/img/'+${contact.image}}" class="img-fluid" />
+      <img th:src="@{'/img/'+${contact.getImage()}}" class="img-fluid" />
     </div>
     <div class="custom-file">
       <input  type="file" name="image" />

@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpSession;
 import java.security.Principal;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/user")
@@ -66,7 +67,7 @@ public class UserController {
 
             String name = principal.getName();
             User user = this.userRepository.getUserByUserName(name);
-//
+
             user.getContacts().add(contact);
             contact.setUser(user);
 
@@ -99,15 +100,10 @@ public class UserController {
 
     @GetMapping("/delete/{c_id}")
     public ModelAndView deleteContact(@PathVariable("c_id") int c_id, HttpSession session) {
-        // Optional<Contact> optionalContact= this.contactRepository.findById(cId);
-        System.out.println("id= " + c_id);
-        contactRepository.deleteById(c_id);
-       /* Contact contact = this.contactRepository.findById(cId).orElse(null);
-        if (contact != null) {
-            this.contactRepository.delete(contact);
-        }*/
+        System.out.println("delete contact start");
+        this.contactRepository.deleteByContactId(c_id);
+        System.out.println("delete contact end");
         session.setAttribute("message", new Message("Contact Deleted Successfully..!", "success"));
-
         return new ModelAndView("redirect:/user/show-contacts/0");
     }
 
@@ -123,26 +119,17 @@ public class UserController {
     //update contact handler
     @RequestMapping(value = "/process-update", method = RequestMethod.POST)
     public ModelAndView updateHandler(@ModelAttribute Contact contact, Principal principal, HttpSession session) {
+        System.out.println("update handler start");
         try {
-            // Contact old = this.contactRepository.findById(contact.getcId()).get();
-            User user = this.userRepository.getUserByUserName(principal.getName());
-            System.out.println("userrr" + user);
+            String name = principal.getName();
+            User user = this.userRepository.getUserByUserName(name);
             contact.setUser(user);
-            System.out.println("coontacct: " + contact.getName());
-            /*Contact contact = new Contact();
-            contact.setName(contact1.getName());
-            contact.setNickName(contact1.getNickName());
-            contact.setEmail(contact1.getEmail());
-            contact.setPhone(contact1.getPhone());
-            contact.setDescription(contact1.getDescription());
-            contact.setImage(contact1.getImage());
-            contact.setWork(contact1.getWork());*/
-            this.contactRepository.save(contact);
-            session.setAttribute("message", new Message("Updated Successfully..!", "success"));
+            Contact save = this.contactRepository.save(contact);
+            session.setAttribute("message", new Message("Contact Updated Successfully..!", "success"));
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println("id " + contact.getc_id());
+        System.out.println("update handler end");
         return new ModelAndView("redirect:/user/show-contacts/0");
     }
 
@@ -185,6 +172,14 @@ public class UserController {
         this.orderRepository.save(order);
         System.out.println(data);
         return ResponseEntity.ok(Map.of("msg", "updated"));
+    }
+
+
+    //show profile
+    @GetMapping("/profile")
+    public ModelAndView profile(Model model){
+        model.addAttribute("title","User Profile Page");
+        return new ModelAndView("normal/profile");
     }
 
     @GetMapping("/setting")

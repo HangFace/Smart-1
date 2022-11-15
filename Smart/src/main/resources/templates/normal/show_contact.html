@@ -13,7 +13,8 @@
             <br>
 
             <div class="search-container my-4">
-                <input onkeyup="search()" type="text" class="form-control" placeholder="search your contact" id="search-input">
+                <input onkeyup="search()" type="text" class="form-control" placeholder="search your contact"
+                       id="search-input">
                 <div class="search-result">
                     <h2>search result</h2>
                 </div>
@@ -22,7 +23,7 @@
                 <hr>
                 <thead>
                 <tr>
-                    <th scope="col">#Id</th>
+                    <th scope="col">Id</th>
                     <th scope="col">First Name</th>
                     <th scope="col">Email</th>
                     <th scope="col">Phone</th>
@@ -31,14 +32,16 @@
                 </thead>
                 <tbody>
                 <tr th:each="c :${contacts}">
-                    <th scope="row" th:text="${'SCMUSER'+c.c_id}"> 1</th>
-                    <td th:text="${c.name}">Mark</td>
-                    <td th:text="${c.email}">Otto</td>
-                    <td th:text="${c.phone}">@mdo</td>
+                    <td th:text="${c.getc_id()}"> 1</td>
+                    <!--scope="row"-->
+                    <td th:text="${c.getName()}"></td>
+                    <td th:text="${c.getEmail()}"></td>
+                    <td th:text="${c.getPhone()}"></td>
                     <td>
-                        <a href="#" th:action="@{/user/delete/${c.c_id}}" th:onclick="|deleteContact(${c.c_id})|" class="btn btn-danger btn-sm">DELETE</a>
+                        <a href="#" th:action="@{/user/delete/${c.getc_id()}}" th:onclick="|deleteContact(${c.getc_id()})|"
+                           class="btn btn-danger btn-sm">DELETE</a>
                         <br>
-                        <form class="mt-2" method="post" th:action="@{'/user/update-contact/'+${c.c_id}}">
+                        <form class="mt-2" method="post" th:action="@{'/user/update-contact/'+${c.getc_id()}}">
                             <button type="submit" class="btn btn-primary btn-sm">UPDATE</button>
                         </form>
                     </td>
